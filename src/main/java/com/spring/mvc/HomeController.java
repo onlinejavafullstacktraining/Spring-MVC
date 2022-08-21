@@ -1,12 +1,16 @@
 package com.spring.mvc;
 
+import java.io.IOException;
+
 import javax.validation.Valid;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -47,15 +51,26 @@ public class HomeController {
 	}
 
 	@RequestMapping("/registerProcess")
-	public ModelAndView registerProcess(@Valid Register register, BindingResult bindingResult) {
+	public ModelAndView registerProcess(@Valid Register register, 
+			BindingResult bindingResult, @RequestParam("upload") MultipartFile  file) {
+		if(!file.isEmpty())
+			try {
+				register.setImage(file.getBytes());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		if(bindingResult.hasErrors()) {
 			return new ModelAndView("register")
 					.addObject("error", "Registration failed try one more time");
 		}
+		
 		boolean saveUser = userService.saveUser(register);
-		if (saveUser)
-			return new ModelAndView("home")
-					.addObject("registerMessage", "Successfully- Register");
+		if (saveUser) {
+			register.setBase64(Base64.encodeBase64String(register.getImage()));
+			return new ModelAndView("registerProcess")
+					.addObject("registers", register);
+		}
 		else
 			return new ModelAndView("register")
 					.addObject("error", "Registration failed try one more time");

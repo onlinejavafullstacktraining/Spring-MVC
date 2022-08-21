@@ -10,7 +10,7 @@
 <body>
 	<h1>Create Account</h1>
 	<form:form method="POST" commandName="register"
-		action="registerProcess">
+		action="registerProcess" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td><form:label path="firstName">FirstName</form:label></td>
@@ -41,6 +41,10 @@
 				<td><form:label path="confirmPassword">ConfirmPassword</form:label></td>
 				<td><form:password path="confirmPassword" /></td>
 				<td><form:errors path="confirmPassword" cssClass="error"></form:errors></td>
+			</tr>
+			<tr>
+				<td><form:label path="image">Profile image:</form:label></td>
+				<td><input name="upload" type="file"/>
 			</tr>
 			
 			<tr>

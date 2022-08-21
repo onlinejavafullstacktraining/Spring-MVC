@@ -3,6 +3,8 @@ package com.spring.mvc;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Register {
 	private Long id;
 	@Size(min=3,max=20, message="FirstName must be between 3 and 20 characters")
@@ -17,6 +19,9 @@ public class Register {
 	private String password;
 	@Size(min=3,max=20, message="Confirm Password must be between 3 and 20 characters")
 	private String confirmPassword;
+	private MultipartFile upload;
+	private byte[] image;
+	private String base64;
 	private Login login;
 	
 	
@@ -68,6 +73,24 @@ public class Register {
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
+	public byte[] getImage() {
+		return image;
+	}
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+	public MultipartFile getUpload() {
+		return upload;
+	}
+	public void setUpload(MultipartFile upload) {
+		this.upload = upload;
+	}
+	public String getBase64() {
+		return base64;
+	}
+	public void setBase64(String base64) {
+		this.base64 = base64;
+	}
 	
-
+	
 }

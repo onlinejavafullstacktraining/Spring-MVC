@@ -10,6 +10,7 @@
 		<property name="firstName" column="FIRSTNAME" type="string"></property>
 		<property name="lastName" column="LASTNAME" type="string"></property>
 		<property name="email" column="EMAIL" type="string"></property>
+		<property name="image" column="IMAGE" type="binary"></property>
 		<one-to-one name="login" class="Login"
 			cascade="save-update"></one-to-one>
 
