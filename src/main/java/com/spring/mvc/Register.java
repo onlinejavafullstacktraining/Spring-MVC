@@ -1,11 +1,17 @@
 package com.spring.mvc;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class Register {
+public class Register implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 101044225L;
 	private Long id;
 	@Size(min=3,max=20, message="FirstName must be between 3 and 20 characters")
 	private String firstName;
@@ -19,9 +25,9 @@ public class Register {
 	private String password;
 	@Size(min=3,max=20, message="Confirm Password must be between 3 and 20 characters")
 	private String confirmPassword;
-	private MultipartFile upload;
-	private byte[] image;
+	private MultipartFile file;
 	private String base64;
+	private byte[] image;
 	private Login login;
 	
 	
@@ -73,17 +79,17 @@ public class Register {
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
+	public MultipartFile getFile() {
+		return file;
+	}
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
 	public byte[] getImage() {
 		return image;
 	}
 	public void setImage(byte[] image) {
 		this.image = image;
-	}
-	public MultipartFile getUpload() {
-		return upload;
-	}
-	public void setUpload(MultipartFile upload) {
-		this.upload = upload;
 	}
 	public String getBase64() {
 		return base64;
@@ -91,6 +97,7 @@ public class Register {
 	public void setBase64(String base64) {
 		this.base64 = base64;
 	}
+	
 	
 	
 }

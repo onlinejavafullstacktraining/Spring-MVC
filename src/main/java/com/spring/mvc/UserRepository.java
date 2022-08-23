@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+import org.apache.tomcat.util.codec.binary.Base64;
+import org.hibernate.Criteria;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
@@ -28,6 +31,13 @@ public class UserRepository {
 		@SuppressWarnings("unchecked")
 		List<Login> find = (List<Login>) hibernateTemplate.find("from Login l where l.userName=?", userName);
 		return !find.isEmpty() ? find.get(0) : null;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Register> loadRegisterInfo() {
+		List<?> find=hibernateTemplate.getSessionFactory().getCurrentSession().createQuery("from Register").list();
+		return (List<Register>) find;
+		
 	}
 
 }

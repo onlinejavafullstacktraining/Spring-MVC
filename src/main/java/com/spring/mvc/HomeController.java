@@ -1,6 +1,7 @@
 package com.spring.mvc;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -19,9 +20,12 @@ public class HomeController {
 	private UserService userService;
 
 	@RequestMapping("/")
-	public String homePage() {
+	public ModelAndView homePage() {
+		List<Register> registerList=userService.loadRegisterInfo();
 		System.out.println("homePage method is calling...");
-		return "home";
+		ModelAndView view=new ModelAndView("home");
+		view.addObject("registerList", registerList);
+		return view;
 	}
 
 	@RequestMapping("/login")
@@ -52,14 +56,15 @@ public class HomeController {
 
 	@RequestMapping("/registerProcess")
 	public ModelAndView registerProcess(@Valid Register register, 
-			BindingResult bindingResult, @RequestParam("upload") MultipartFile  file) {
-		if(!file.isEmpty())
+			BindingResult bindingResult, @RequestParam("upload") MultipartFile file) {
+		if(!file.isEmpty()) {
 			try {
 				register.setImage(file.getBytes());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
 		if(bindingResult.hasErrors()) {
 			return new ModelAndView("register")
 					.addObject("error", "Registration failed try one more time");

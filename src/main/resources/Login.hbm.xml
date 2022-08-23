@@ -13,7 +13,7 @@
             
     <property name="userName" column="USERNAME"></property> 
     <property name="password" column="PASSWORD"></property> 
-     <one-to-one name="register" class="Register" constrained="true"></one-to-one>
+     <one-to-one name="register" class="Register" constrained="true" ></one-to-one>
     </class>
     
     </hibernate-mapping>

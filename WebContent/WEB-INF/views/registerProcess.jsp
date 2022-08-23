@@ -1,30 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Register Account Details</title>
 </head>
 <body>
-<table border="1">
-		<tr>
-			<th>Id</th>
-			<th>FirstName</th>
-			<th>LastName</th>
-			<th>Email</th>
-			<th>Photo</th>
-		</tr>
-		<c:if test="${! empty registers}">
+	<h1>Register Account Details</h1>
+	<c:if test="${! empty register}">
+		<table border="2">
 			<tr>
-				<td>${registers.id}</td>
-				<td>${registers.firstName}</td>
-				<td>${registers.lastName}</td>
-				<td>${registers.email}</td>
-				<td><img width="100" height="100" src="data:image/jpeg;base64,${registers.base64}"></td>
+				<th>User ID</th>
+				<th>User FirstName</th>
+				<th>User LastName</th>
+				<th>User Email</th>
+				<th>User Profile Image</th>
 			</tr>
-		</c:if>
-	</table>
+			<tr>
+				<td>${register.id}</td>
+				<td>${register.firstName}</td>
+				<td>${register.lastName}</td>
+				<td>${register.email}</td>
+				<td><img width="200" height="200"
+					src="data:image/jpeg;base64,${register.base64}"></td>
+			</tr>
+		</table>
+	</c:if>
 </body>
 </html>
