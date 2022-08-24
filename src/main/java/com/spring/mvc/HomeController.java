@@ -80,5 +80,9 @@ public class HomeController {
 			return new ModelAndView("register")
 					.addObject("error", "Registration failed try one more time");
 	}
+	@RequestMapping("/accessdenied")
+	public ModelAndView accessDenied() {
+		return new ModelAndView("accessdenied");
+	}
 
 }

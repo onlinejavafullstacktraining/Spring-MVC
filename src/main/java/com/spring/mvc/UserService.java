@@ -23,7 +23,7 @@ public class UserService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public boolean saveUser(Register register) {
 		if (userRepository.saveUser(register)) {
-			emailService.sendEmail(register);
+			//emailService.sendEmail(register);
 			alertService.sendUserAlert(register);
 			return true;
 		}
@@ -44,14 +44,13 @@ public class UserService {
 		 List<Register> registerInfo = userRepository.loadRegisterInfo();
 		 List<Register> registerList=new ArrayList<>();
 		 for(Register register: registerInfo) {
-			 System.out.println(register.getImage());
 			 register.setBase64(Base64.encodeBase64String(register.getImage()));
 			 registerList.add(register);
 		 }
-		 Register register=alertService.getRegisterAlert();
+		 /*Register register=alertService.getRegisterAlert();
 		 System.out.println(register.getId());
 		 System.out.println(register.getFirstName());
-		 System.out.println(register.getLastName());
+		 System.out.println(register.getLastName());*/
 		 return registerList;
 	}
 }
