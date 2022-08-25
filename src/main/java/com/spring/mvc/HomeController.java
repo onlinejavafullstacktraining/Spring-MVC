@@ -84,5 +84,10 @@ public class HomeController {
 	public ModelAndView accessDenied() {
 		return new ModelAndView("accessdenied");
 	}
+	
+	@RequestMapping("/logout")
+	public ModelAndView logout() {
+		return new ModelAndView("logout");
+	}
 
 }

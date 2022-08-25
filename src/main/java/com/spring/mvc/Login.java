@@ -16,8 +16,8 @@ public class Login implements Serializable{
 	private String userName;
 	@NotEmpty
 	private String password;
-	private String validFlag;
-	private Set<Role> roles = new HashSet<Role>();
+	private boolean validFlag;
+	private Set<Role> roles=new HashSet<>();
 	private Register register;
 	
 	
@@ -45,21 +45,18 @@ public class Login implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public String getValidFlag() {
+	public boolean isValidFlag() {
 		return validFlag;
 	}
-	public void setValidFlag(String validFlag) {
+	public void setValidFlag(boolean validFlag) {
 		this.validFlag = validFlag;
 	}
 	public Set<Role> getRoles() {
 		return roles;
 	}
-
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
 	
-	
-	
+
 }

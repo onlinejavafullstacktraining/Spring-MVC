@@ -28,10 +28,8 @@
 		<sec:intercept-url pattern="/logout" access="permitAll" />
 		<sec:intercept-url pattern="/accessdenied" access="permitAll" />
 		<sec:intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
-		<!-- <sec:intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')" /> -->
-		<!-- <sec:access-denied-handler error-page="/403"/> -->
-		<!-- <sec:form-login login-page="/login" default-target-url="/loginProcess" authentication-failure-url="/accessdenied"/> -->
-		<!-- <sec:logout logout-success-url="/logout"/> -->
+		<sec:intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')" />
+		
 		<sec:form-login authentication-failure-url="/accessdenied"/>
 		<sec:http-basic />
 		<sec:logout logout-success-url="/logout"/> 
@@ -47,19 +45,11 @@
 	</sec:authentication-manager> -->
 	
 	<sec:authentication-manager alias="authenticationManager">
-        <!-- <authentication-provider>
-            <user-service>
-                <user name="lokesh" password="password" authorities="ROLE_USER" />
-                
-            </user-service>
-            <jdbc-user-service data-source-ref="dataSource" 
-            users-by-username-query="select username,password from user where username=?" 
-            authorities-by-username-query="select username"/>
-        </authentication-provider> -->
-        <sec:authentication-provider user-service-ref="myUserDetailsService" >
-           <!--  <password-encoder hash="bcrypt" />  -->
-             </sec:authentication-provider>
-    </sec:authentication-manager>
+		<sec:authentication-provider user-service-ref="myUserDetailsService">
+			
+		</sec:authentication-provider>
+	</sec:authentication-manager>
+	
 	
 	<context:component-scan
 		base-package="com.spring.mvc" />
@@ -86,7 +76,7 @@
 			<list>
 				<value>Login.hbm.xml</value>
 				<value>Register.hbm.xml</value>
-				<value>Role.hbm.xml</value>
+				<value>Roles.hbm.xml</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

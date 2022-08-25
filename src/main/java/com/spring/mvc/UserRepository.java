@@ -3,6 +3,7 @@ package com.spring.mvc;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.hibernate.Criteria;
@@ -18,11 +19,18 @@ public class UserRepository {
 
 	public boolean saveUser(Register register) {
 		Login login = new Login();
+		Role role=new Role();
+		role.setRole("ROLE_USER");
+		role.setLogin(login);
 		login.setUserName(register.getUserName());
 		login.setPassword(register.getPassword());
+		login.setValidFlag(Boolean.TRUE);
 		login.setRegister(register);
+		login.setRoles(Set.of(role));
 		register.setLogin(login);
+		
 		Serializable serializable = hibernateTemplate.save(register);
+		hibernateTemplate.save(role);
 		return Objects.nonNull(serializable) ? Boolean.TRUE : Boolean.FALSE;
 
 	}

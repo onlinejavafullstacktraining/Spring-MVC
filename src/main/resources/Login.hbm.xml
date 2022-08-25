@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>  
 <!DOCTYPE hibernate-mapping PUBLIC  
  "-//Hibernate/Hibernate Mapping DTD 5.3//EN"  
- "http://hibernate.org/dtd/hibernate-mapping-2.0.dtd">
+ "http://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="com.spring.mvc">
 	<class name="Login" table="LOGIN">
@@ -13,16 +13,16 @@
 
 		<property name="userName" column="USERNAME"></property>
 		<property name="password" column="PASSWORD"></property>
-		<property name="validFlag" column="valid_Flag"/>
-		<one-to-one name="register" class="Register" constrained="true"></one-to-one>
-		<set name="roles" table="user_roles" inverse="true">
-		<!-- fetch="select" lazy="true" to eliminate initialize exception -->
-		 
+		<property name="validFlag" column="Valid_Flag"></property>
+		<one-to-one name="register" class="Register"
+			constrained="true"></one-to-one>
+		<set name="roles" inverse="true"  fetch="select" lazy="false">
 			<key>
-				<column name="LOGIN_ID" not-null="true" />
+				<column name="LOGIN_ID" not-null="true"/>
 			</key>
-			<one-to-many class="Role" />
+			<one-to-many class="Role"/>
 		</set>
+
 	</class>
 
 </hibernate-mapping>
